@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Um pouco de nós</title>
+    <style>
+        body {
+            background: rgb(241, 192, 255);
+            font-family: Candara;
+            text-align: center;
+            padding: 50px;
+            color: rgb(92, 43, 226);
+        }
+
+        video {
+            max-width: 70%; /* Reduz para 70% da largura do container */
+            max-height: 60vh; /* Limita a altura */
+            width: auto; /* Mantém proporção */
+            height: auto;
+            border: 2px solid rgb(92, 43, 226); /* Borda opcional */
+        }
+        .nos{
+            border-radius: 6px;
+            color: rgb(255, 0, 76);
+            font-size: 35px;
+            display: inline-block;
+            padding: 2px 6px;
+            margin: 30px;
+            background-color: rgb(255, 255, 255);
+            box-shadow: 1px 1px 5px#000000;
+        }
+
+        .text{
+            background-color: rgb(255, 255, 255);
+            font-size: 15px;
+            box-shadow: 1px 1px 5px#000000;
+    
+        }
+
+        .disp{
+            color: rgb(92, 43, 226);
+            border-radius: 6px;
+            font-size: 20px;
+            display: inline-block;
+            padding: 2px 6px;
+            margin: 5px;
+            background-color: rgb(255, 255, 255);
+            box-shadow: 1px 1px 5px#000000;
+
+        }
+        #timer {
+            font-size: 30px;
+            font-weight: bold;
+            margin: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 1px 1px 5px#000000;
+        }
+        #video-container {
+            display: none;
+            margin-top: 30px;
+        }
+        video {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+        .heart {
+            font-size: 50px;
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="heart">❤️</div>
+    <h1 class="nos">Um Pouco de Nós</h1><br>
+    <p class="disp">Disponível em:</p><br>
+    
+    <!-- CRONÔMETRO AQUI -->
+    <div id="timer">Carregando...</div>
+    
+    <!-- VÍDEO (inicialmente escondido) -->
+    <div id="video-container">
+        <p class="text">❤️Você liberou o vídeo mais lindo que verá hoje❤️ </p>
+        <video controls autoplay>
+            <source src="amor.mp4" type="video/mp4">
+        </video>
+        <p class="text">Feliz Dia dos Namorados Meu Amor!<br>
+            Obrigado por sempre estar ao meu lado, sempre ser minha companheira<br>
+            Unidos desde de 13.06.2020<br>
+            Quanto mais o tempo passa mais sinto que quero viver ao seu lado<br>
+
+        </p>
+    </div>
+
+    <script>
+        // CONFIGURAÇÃO DA DATA (12 de junho de 2024, 00:00)
+        const targetDate = new Date();
+        targetDate.setMonth(5); // Junho (0=janeiro, 5=junho)
+        targetDate.setDate(9); //Alterar para dia 12 apos todos testes
+        targetDate.setHours(0, 0, 0, 0);
+        
+        function updateTimer() {
+            const now = new Date();
+            const diff = targetDate - now;
+            
+            // SE JÁ PASSOU DA DATA
+            if (diff <= 0) {
+                document.getElementById('timer').innerHTML = "🎉 É hoje! 🎉";
+                document.getElementById('video-container').style.display = 'block';
+                return;
+            }
+            
+            // CALCULAR TEMPO RESTANTE
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            // MOSTRAR CRONÔMETRO
+            document.getElementById('timer').innerHTML = 
+                `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+        
+        // ATUALIZAR A CADA SEGUNDO
+        setInterval(updateTimer, 1000);
+        updateTimer(); // EXECUTAR IMEDIATAMENTE
+        
+        // DEBUG (para verificar no console)
+        console.log("Data de liberação:", targetDate);
+    </script>
+</body>
+</html>
