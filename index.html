@@ -98,41 +98,45 @@
         </p>
     </div>
 
-    <script>
-        // CONFIGURAÇÃO DA DATA (12 de junho de 2024, 07:00)
-        const targetDate = new Date();
-        targetDate.setMonth(5); // Junho (0=janeiro, 5=junho)
-        targetDate.setDate(12); //Alterar para dia 12 apos todos testes
-        targetDate.setHours(0, 7, 0, 0);
+<script>
+    // CONFIGURAÇÃO DA DATA (12 de junho de 2024, 07:00)
+    const targetDate = new Date();
+    targetDate.setMonth(5); // Junho (0=janeiro, 5=junho)
+    targetDate.setDate(12); // Dia 12
+    targetDate.setHours(7, 0, 0, 0); // 07:00:00.000
+    
+    function updateTimer() {
+        const now = new Date();
+        const diff = targetDate - now;
         
-        function updateTimer() {
-            const now = new Date();
-            const diff = targetDate - now;
+        // SE JÁ PASSOU DA DATA
+        if (diff <= 0) {
+            document.getElementById('timer').innerHTML = "🎉 É hoje! 🎉";
+            document.getElementById('video-container').style.display = 'block';
             
-            // SE JÁ PASSOU DA DATA
-            if (diff <= 0) {
-                document.getElementById('timer').innerHTML = "🎉 É hoje! 🎉";
-                document.getElementById('video-container').style.display = 'block';
-                return;
-            }
-            
-            // CALCULAR TEMPO RESTANTE
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-            
-            // MOSTRAR CRONÔMETRO
-            document.getElementById('timer').innerHTML = 
-                `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            // Forçar play no iPhone (requer interação do usuário)
+            const video = document.querySelector('video');
+            video.play().catch(e => console.log("Toque no vídeo para iniciar"));
+            return;
         }
         
-        // ATUALIZAR A CADA SEGUNDO
-        setInterval(updateTimer, 1000);
-        updateTimer(); // EXECUTAR IMEDIATAMENTE
+        // CALCULAR TEMPO RESTANTE
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
         
-        // DEBUG (para verificar no console)
-        console.log("Data de liberação:", targetDate);
-    </script>
+        // MOSTRAR CRONÔMETRO
+        document.getElementById('timer').innerHTML = 
+            `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+    
+    // ATUALIZAR A CADA SEGUNDO
+    setInterval(updateTimer, 1000);
+    updateTimer(); // EXECUTAR IMEDIATAMENTE
+    
+    // DEBUG (para verificar no console)
+    console.log("O vídeo será liberado em:", targetDate);
+</script>
 </body>
 </html>
