@@ -68,17 +68,16 @@
         .petal {
             position: fixed;
             top: -50px;
-            width: 20px;
-            height: 20px;
-            background-image: url('https://i.imgur.com/oY2ZrxY.png'); /* pétala rosa */
+            width: 25px;
+            height: 25px;
+            background-image: url('https://cdn.pixabay.com/photo/2017/01/31/19/15/petal-2028345_1280.png');
             background-size: contain;
             background-repeat: no-repeat;
             pointer-events: none;
-            opacity: 0.8;
+            opacity: 0.9;
             animation: fall linear infinite;
             z-index: 999;
         }
-
 
         .heart {
             font-size: 50px;
@@ -163,30 +162,23 @@
     
     // DEBUG (para verificar no console)
     console.log("O vídeo será liberado em:", targetDate);
-        function createPetal() {
+    
+    function createPetal() {
         const petal = document.createElement('div');
         petal.classList.add('petal');
 
-        // Posição horizontal aleatória
         petal.style.left = Math.random() * window.innerWidth + 'px';
-
-        // Duração aleatória da queda
         petal.style.animationDuration = (Math.random() * 3 + 2) + 's';
 
-        // Tamanho aleatório
-        const size = Math.random() * 10 + 10;
+        const size = Math.random() * 10 + 15;
         petal.style.width = size + 'px';
         petal.style.height = size + 'px';
 
         document.body.appendChild(petal);
 
-        // Remover após animação
-        setTimeout(() => {
-            petal.remove();
-        }, 5000);
+        setTimeout(() => petal.remove(), 5000);
     }
 
-    // Criar pétalas continuamente
     setInterval(createPetal, 300);
 </script>
 </body>
