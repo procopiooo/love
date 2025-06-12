@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Um pouco de nós</title>
+    <title>Presente Especial</title>
     <style>
         body {
             background: rgb(241, 192, 255);
@@ -9,16 +9,42 @@
             text-align: center;
             padding: 50px;
             color: rgb(92, 43, 226);
+            overflow-x: hidden; /* Impede barra de rolagem horizontal */
+            position: relative; /* Para as pétalas */
+        }
+
+        /* Estilo das Pétalas */
+        .petal {
+            position: fixed;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23ff6b8b" d="M50 0 Q60 40 80 50 Q60 60 50 100 Q40 60 20 50 Q40 40 50 0 Z"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 100;
+            pointer-events: none;
+            opacity: 0.8;
+            animation-timing-function: ease-in-out;
+        }
+
+        @keyframes fall {
+            0% {
+                top: -10%;
+                transform: rotate(0deg);
+            }
+            100% {
+                top: 110%;
+                transform: rotate(360deg);
+            }
         }
 
         video {
-            max-width: 70%; /* Reduz para 70% da largura do container */
-            max-height: 60vh; /* Limita a altura */
-            width: auto; /* Mantém proporção */
+            max-width: 70%;
+            max-height: 60vh;
+            width: auto;
             height: auto;
-            border: 2px solid rgb(92, 43, 226); /* Borda opcional */
+            border: 2px solid rgb(92, 43, 226);
         }
-        .nos{
+        
+        .nos {
             border-radius: 6px;
             color: rgb(255, 0, 76);
             font-size: 35px;
@@ -27,16 +53,26 @@
             margin: 30px;
             background-color: rgb(255, 255, 255);
             box-shadow: 1px 1px 5px#000000;
+            position: relative;
+            z-index: 200; /* Fica acima das pétalas */
         }
 
-        .text{
+        .text {
             background-color: rgb(255, 255, 255);
             font-size: 15px;
             box-shadow: 1px 1px 5px#000000;
-    
+            position: relative;
+            z-index: 200;
+        }       
+        .text1 {
+            background-color: rgb(255, 255, 255);
+            font-size: 25px;
+            box-shadow: 1px 1px 5px#000000;
+            position: relative;
+            z-index: 200;
         }
 
-        .disp{
+        .disp {
             color: rgb(92, 43, 226);
             border-radius: 6px;
             font-size: 20px;
@@ -45,8 +81,10 @@
             margin: 5px;
             background-color: rgb(255, 255, 255);
             box-shadow: 1px 1px 5px#000000;
-
+            position: relative;
+            z-index: 200;
         }
+        
         #timer {
             font-size: 30px;
             font-weight: bold;
@@ -56,49 +94,30 @@
             border-radius: 10px;
             display: inline-block;
             box-shadow: 1px 1px 5px#000000;
+            position: relative;
+            z-index: 200;
         }
+        
         #video-container {
             display: none;
             margin-top: 30px;
+            position: relative;
+            z-index: 200;
         }
-        video {
-            max-width: 100%;
-            border-radius: 10px;
-        }
-        .petal {
-            position: fixed;
-            top: -50px;
-            width: 25px;
-            height: 25px;
-            background-image: url('https://cdn.pixabay.com/photo/2017/01/31/19/15/petal-2028345_1280.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            pointer-events: none;
-            opacity: 0.9;
-            animation: fall linear infinite;
-            z-index: 999;
-        }
-
+        
         .heart {
             font-size: 50px;
             animation: pulse 1s infinite;
+            position: relative;
+            z-index: 200;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
         }
+        
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.3); }
             100% { transform: scale(1); }
         }
-        @keyframes fall {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-        
     </style>
 </head>
 <body>
@@ -111,75 +130,103 @@
     
     <!-- VÍDEO (inicialmente escondido) -->
     <div id="video-container">
-        <p class="text">❤️Você liberou o vídeo mais lindo que verá hoje❤️ </p>
+        <p class="text1">❤️Você liberou o vídeo mais lindo que verá hoje❤️ </p>
         <video controls autoplay>
             <source src="amor.mp4" type="video/mp4">
         </video>
         <p class="text">Feliz Dia dos Namorados Meu Amor!<br>
+            Hoje comemoramos dia dos namorados<br>
             Obrigado por sempre estar ao meu lado, sempre ser minha companheira<br>
+            e amanha comemoramos 5 Anos Juntos<br>
             Unidos desde de 13.06.2020<br>
-            Quanto mais o tempo passa mais sinto que quero viver ao seu lado<br>
-
+            Obrigado por ser parceira me mostrar o lado bom de ter alguem ao meu lado para somar.<br>
+            A cinco anos atras nossos caminhos se encontraram, e desde então,<br>
+            cada momento ao seu lado se tornou o melhor capítulo da minha vida.<br>
+            Que venham muitos mais anos de amor, sorrisos e conquistas<br>
+            💖-Sempre Juntos-💖
         </p>
     </div>
 
-<script>
-    // CONFIGURAÇÃO DA DATA (12 de junho de 2024, 07:00)
-    const targetDate = new Date();
-    targetDate.setMonth(5); // Junho (0=janeiro, 5=junho)
-    targetDate.setDate(12); // Dia 12
-    targetDate.setHours(7, 0, 0, 0); // 07:00:00.000
-    
-    function updateTimer() {
-        const now = new Date();
-        const diff = targetDate - now;
+    <script>
+        // CONFIGURAÇÃO DA DATA (12 de junho de 2024, 00:00)
+        const targetDate = new Date();
+        targetDate.setMonth(5); // Junho (0=janeiro, 5=junho)
+        targetDate.setDate(12); //Alterar para dia 12 apos todos testes
+        targetDate.setHours(7, 30, 0, 0);
         
-        // SE JÁ PASSOU DA DATA
-        if (diff <= 0) {
-            document.getElementById('timer').innerHTML = "🎉 É hoje! 🎉";
-            document.getElementById('video-container').style.display = 'block';
+        // Criação das pétalas
+        function createPetals() {
+            const colors = [
+                '#ff6b8b', // Rosa
+                '#ffb8c6', // Rosa claro
+                '#ff8eab', // Rosa médio
+                '#ff3d6e'  // Rosa escuro
+            ];
             
-            // Forçar play no iPhone (requer interação do usuário)
-            const video = document.querySelector('video');
-            video.play().catch(e => console.log("Toque no vídeo para iniciar"));
-            return;
+            const petalCount = 15;
+            
+            for (let i = 0; i < petalCount; i++) {
+                setTimeout(() => {
+                    const petal = document.createElement('div');
+                    petal.className = 'petal';
+                    
+                    // Tamanho aleatório entre 15px e 30px
+                    const size = Math.random() * 15 + 15;
+                    petal.style.width = size + 'px';
+                    petal.style.height = size + 'px';
+                    
+                    // Posição inicial aleatória
+                    petal.style.left = Math.random() * 100 + 'vw';
+                    petal.style.top = -30 + 'px';
+                    
+                    // Cor aleatória
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    petal.style.filter = `hue-rotate(${Math.random() * 30}deg) brightness(1.2)`;
+                    
+                    // Animação personalizada para cada pétala
+                    const duration = Math.random() * 10 + 10;
+                    petal.style.animation = `fall ${duration}s linear infinite`;
+                    petal.style.animationDelay = Math.random() * 5 + 's';
+                    
+                    document.body.appendChild(petal);
+                }, i * 1000);
+            }
+        }
+
+        // Inicia a animação das pétalas
+        window.onload = function() {
+            createPetals();
+            setInterval(createPetals, 15000); // Cria novas pétalas a cada 15s
+        };
+        
+        function updateTimer() {
+            const now = new Date();
+            const diff = targetDate - now;
+            
+            // SE JÁ PASSOU DA DATA
+            if (diff <= 0) {
+                document.getElementById('timer').innerHTML = "🎉 É hoje! 🎉";
+                document.getElementById('video-container').style.display = 'block';
+                return;
+            }
+            
+            // CALCULAR TEMPO RESTANTE
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            // MOSTRAR CRONÔMETRO
+            document.getElementById('timer').innerHTML = 
+                `${days}d ${hours}h ${minutes}m ${seconds}s`;
         }
         
-        // CALCULAR TEMPO RESTANTE
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        // ATUALIZAR A CADA SEGUNDO
+        setInterval(updateTimer, 1000);
+        updateTimer(); // EXECUTAR IMEDIATAMENTE
         
-        // MOSTRAR CRONÔMETRO
-        document.getElementById('timer').innerHTML = 
-            `${days}d ${hours}h ${minutes}m ${seconds}s`;
-    }
-    
-    // ATUALIZAR A CADA SEGUNDO
-    setInterval(updateTimer, 1000);
-    updateTimer(); // EXECUTAR IMEDIATAMENTE
-    
-    // DEBUG (para verificar no console)
-    console.log("O vídeo será liberado em:", targetDate);
-    
-    function createPetal() {
-        const petal = document.createElement('div');
-        petal.classList.add('petal');
-
-        petal.style.left = Math.random() * window.innerWidth + 'px';
-        petal.style.animationDuration = (Math.random() * 3 + 2) + 's';
-
-        const size = Math.random() * 10 + 15;
-        petal.style.width = size + 'px';
-        petal.style.height = size + 'px';
-
-        document.body.appendChild(petal);
-
-        setTimeout(() => petal.remove(), 5000);
-    }
-
-    setInterval(createPetal, 300);
-</script>
+        // DEBUG (para verificar no console)
+        console.log("Data de liberação:", targetDate);
+    </script>
 </body>
 </html>
